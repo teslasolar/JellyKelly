@@ -306,6 +306,49 @@
       text-align: center;
     }
 
+    /* Media error / placeholder state */
+    .media-wrapper {
+      position: relative;
+    }
+
+    .media-placeholder {
+      display: none;
+      width: 100%;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px dashed rgba(100, 200, 255, 0.2);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .media-placeholder .placeholder-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      opacity: 0.5;
+      animation: jelly-float 6s ease-in-out infinite;
+    }
+
+    .media-placeholder .placeholder-text {
+      font-size: 0.85rem;
+      color: #80cbc4;
+      line-height: 1.6;
+    }
+
+    .media-placeholder .placeholder-hint {
+      font-size: 0.75rem;
+      color: #4db6ac;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    .media-wrapper.has-error video {
+      display: none;
+    }
+
+    .media-wrapper.has-error .media-placeholder {
+      display: block;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -408,10 +451,17 @@
         <div class="track-number">Track 01</div>
         <h2>Jelly Kelly</h2>
         <p class="song-desc">The title track &mdash; deep currents, floating melodies, and the pulse of the open sea.</p>
-        <video controls preload="metadata">
-          <source src="JellyKelly.mp4" type="video/mp4">
-          Your browser does not support the video element.
-        </video>
+        <div class="media-wrapper">
+          <video controls preload="metadata">
+            <source src="JellyKelly.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <div class="media-placeholder">
+            <div class="placeholder-icon">&#x1FAB9;</div>
+            <div class="placeholder-text">Jelly Kelly &mdash; coming soon</div>
+            <div class="placeholder-hint">Replace JellyKelly.mp4 with the real file to play</div>
+          </div>
+        </div>
         <div class="media-label">&#x25B6; Press play to dive in</div>
       </div>
 
@@ -419,10 +469,17 @@
         <div class="track-number">Track 02</div>
         <h2>Gettin' the D</h2>
         <p class="song-desc">Riding the tide &mdash; raw energy crashing against the shore, sun on the horizon.</p>
-        <video controls preload="metadata">
-          <source src="GettinTheD.mp4" type="video/mp4">
-          Your browser does not support the video element.
-        </video>
+        <div class="media-wrapper">
+          <video controls preload="metadata">
+            <source src="GettinTheD.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <div class="media-placeholder">
+            <div class="placeholder-icon">&#x1FAB9;</div>
+            <div class="placeholder-text">Gettin' the D &mdash; coming soon</div>
+            <div class="placeholder-hint">Replace GettinTheD.mp4 with the real file to play</div>
+          </div>
+        </div>
         <div class="media-label">&#x25B6; Press play to dive in</div>
       </div>
 
@@ -433,6 +490,28 @@
       Jelly Kelly &copy; 2026 &middot; All rights reserved
     </footer>
   </div>
+
+  <script>
+    // Detect media load errors and show placeholder
+    document.querySelectorAll('.media-wrapper video').forEach(function(video) {
+      video.addEventListener('error', function() {
+        video.closest('.media-wrapper').classList.add('has-error');
+      });
+      // Also catch source errors
+      var source = video.querySelector('source');
+      if (source) {
+        source.addEventListener('error', function() {
+          video.closest('.media-wrapper').classList.add('has-error');
+        });
+      }
+      // Fallback: if metadata doesn't load within 3 seconds, show placeholder
+      setTimeout(function() {
+        if (video.readyState === 0 && video.networkState !== 1) {
+          video.closest('.media-wrapper').classList.add('has-error');
+        }
+      }, 3000);
+    });
+  </script>
 
 </body>
 </html>
