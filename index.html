@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jelly Kelly - Ocean Vibes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(180deg, #0a1628 0%, #0d2137 15%, #0f3460 35%, #1a6b8a 55%, #2e8b9e 70%, #48b5a3 85%, #7dd4b0 100%);
+      min-height: 100vh;
+      color: #e0f7fa;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ocean wave animation at the bottom */
+    .ocean {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 0;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+    }
+
+    .wave svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .wave:nth-child(1) {
+      animation: wave-drift 7s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    .wave:nth-child(2) {
+      animation: wave-drift 11s ease-in-out infinite reverse;
+      opacity: 0.4;
+      bottom: 10px;
+    }
+
+    .wave:nth-child(3) {
+      animation: wave-drift 9s ease-in-out infinite;
+      opacity: 0.2;
+      bottom: 20px;
+    }
+
+    @keyframes wave-drift {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-25%); }
+    }
+
+    /* Birdie animations */
+    .birdies-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .birdie {
+      position: absolute;
+      font-size: 1.2rem;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .birdie:nth-child(1) {
+      top: 8%;
+      animation: fly-across 18s linear infinite;
+      animation-delay: 0s;
+    }
+
+    .birdie:nth-child(2) {
+      top: 14%;
+      animation: fly-across 22s linear infinite;
+      animation-delay: -5s;
+      font-size: 1rem;
+    }
+
+    .birdie:nth-child(3) {
+      top: 5%;
+      animation: fly-across 15s linear infinite;
+      animation-delay: -10s;
+      font-size: 0.9rem;
+    }
+
+    .birdie:nth-child(4) {
+      top: 20%;
+      animation: fly-across-reverse 20s linear infinite;
+      animation-delay: -3s;
+    }
+
+    .birdie:nth-child(5) {
+      top: 11%;
+      animation: fly-across 25s linear infinite;
+      animation-delay: -14s;
+      font-size: 1.4rem;
+    }
+
+    .birdie:nth-child(6) {
+      top: 18%;
+      animation: fly-across-reverse 17s linear infinite;
+      animation-delay: -8s;
+      font-size: 0.8rem;
+    }
+
+    .birdie:nth-child(7) {
+      top: 3%;
+      animation: fly-across 21s linear infinite;
+      animation-delay: -2s;
+      font-size: 1.1rem;
+    }
+
+    @keyframes fly-across {
+      0% { left: -5%; transform: translateY(0) scaleX(1); }
+      25% { transform: translateY(-12px) scaleX(1); }
+      50% { transform: translateY(0) scaleX(1); }
+      75% { transform: translateY(-8px) scaleX(1); }
+      100% { left: 105%; transform: translateY(0) scaleX(1); }
+    }
+
+    @keyframes fly-across-reverse {
+      0% { left: 105%; transform: translateY(0) scaleX(-1); }
+      25% { transform: translateY(-10px) scaleX(-1); }
+      50% { transform: translateY(0) scaleX(-1); }
+      75% { transform: translateY(-14px) scaleX(-1); }
+      100% { left: -5%; transform: translateY(0) scaleX(-1); }
+    }
+
+    /* Floating bubbles */
+    .bubbles {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      animation: bubble-rise linear infinite;
+    }
+
+    .bubble:nth-child(1) { left: 10%; width: 8px; height: 8px; animation-duration: 8s; animation-delay: 0s; }
+    .bubble:nth-child(2) { left: 25%; width: 14px; height: 14px; animation-duration: 10s; animation-delay: -2s; }
+    .bubble:nth-child(3) { left: 45%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: -4s; }
+    .bubble:nth-child(4) { left: 60%; width: 10px; height: 10px; animation-duration: 9s; animation-delay: -1s; }
+    .bubble:nth-child(5) { left: 80%; width: 16px; height: 16px; animation-duration: 12s; animation-delay: -6s; }
+    .bubble:nth-child(6) { left: 35%; width: 9px; height: 9px; animation-duration: 11s; animation-delay: -3s; }
+    .bubble:nth-child(7) { left: 70%; width: 7px; height: 7px; animation-duration: 8s; animation-delay: -5s; }
+    .bubble:nth-child(8) { left: 90%; width: 11px; height: 11px; animation-duration: 10s; animation-delay: -7s; }
+
+    @keyframes bubble-rise {
+      0% { bottom: -20px; opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { bottom: 100%; opacity: 0; }
+    }
+
+    /* Jellyfish float accents */
+    .jellyfish {
+      position: fixed;
+      font-size: 2.5rem;
+      opacity: 0.15;
+      animation: jelly-float 12s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .jellyfish:nth-child(1) { bottom: 15%; left: 5%; animation-delay: 0s; }
+    .jellyfish:nth-child(2) { bottom: 30%; right: 8%; animation-delay: -4s; font-size: 2rem; }
+    .jellyfish:nth-child(3) { bottom: 45%; left: 15%; animation-delay: -8s; font-size: 1.5rem; }
+
+    @keyframes jelly-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(5deg); }
+      66% { transform: translateY(10px) rotate(-3deg); }
+    }
+
+    /* Main content */
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 180px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-top: 30px;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: normal;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #b2ebf2;
+      text-shadow: 0 0 30px rgba(100, 200, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 8px;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      color: #80cbc4;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    header .tagline {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: #4db6ac;
+      letter-spacing: 2px;
+    }
+
+    /* Song cards */
+    .songs {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .song-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .song-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 150, 200, 0.2);
+      border-color: rgba(100, 200, 255, 0.3);
+    }
+
+    .song-card .track-number {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #4db6ac;
+      margin-bottom: 8px;
+    }
+
+    .song-card h2 {
+      font-size: 1.8rem;
+      font-weight: normal;
+      color: #e0f7fa;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .song-card .song-desc {
+      font-size: 0.9rem;
+      color: #80cbc4;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .song-card video {
+      width: 100%;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .song-card .media-label {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #4db6ac;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      color: #4db6ac;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    footer .ocean-line {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      opacity: 0.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+
+      header .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+      }
+
+      .song-card {
+        padding: 20px;
+      }
+
+      .song-card h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Birdies flying across the sky -->
+  <div class="birdies-container">
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+    <div class="birdie">&#x1F426;</div>
+  </div>
+
+  <!-- Jellyfish accents -->
+  <div class="jellyfish">&#x1FAB9;</div>
+  <div class="jellyfish">&#x1FAB9;</div>
+  <div class="jellyfish">&#x1FAB9;</div>
+
+  <!-- Bubbles -->
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <!-- Ocean waves -->
+  <div class="ocean">
+    <div class="wave">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,40 C320,100 420,10 720,50 C1020,90 1200,20 1440,60 L1440,120 L0,120 Z" fill="rgba(10, 80, 120, 0.7)"/>
+      </svg>
+    </div>
+    <div class="wave">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,60 C200,20 400,90 720,40 C1040,0 1300,80 1440,50 L1440,120 L0,120 Z" fill="rgba(8, 60, 100, 0.6)"/>
+      </svg>
+    </div>
+    <div class="wave">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,50 C360,90 540,20 900,60 C1100,80 1300,30 1440,70 L1440,120 L0,120 Z" fill="rgba(6, 40, 80, 0.8)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container">
+    <header>
+      <h1>Jelly Kelly</h1>
+      <div class="subtitle">Ocean Vibes</div>
+      <div class="tagline">where the birdies sing and the jellyfish swing</div>
+    </header>
+
+    <div class="songs">
+
+      <div class="song-card">
+        <div class="track-number">Track 01</div>
+        <h2>Jelly Kelly</h2>
+        <p class="song-desc">The title track &mdash; deep currents, floating melodies, and the pulse of the open sea.</p>
+        <video controls preload="metadata">
+          <source src="JellyKelly.mp4" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+        <div class="media-label">&#x25B6; Press play to dive in</div>
+      </div>
+
+      <div class="song-card">
+        <div class="track-number">Track 02</div>
+        <h2>Gettin' the D</h2>
+        <p class="song-desc">Riding the tide &mdash; raw energy crashing against the shore, sun on the horizon.</p>
+        <video controls preload="metadata">
+          <source src="GettinTheD.mp4" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+        <div class="media-label">&#x25B6; Press play to dive in</div>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="ocean-line">~ ~ ~ ~ ~ ~ ~</div>
+      Jelly Kelly &copy; 2026 &middot; All rights reserved
+    </footer>
+  </div>
+
+</body>
+</html>
